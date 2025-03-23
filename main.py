@@ -118,7 +118,7 @@ class AddItemWindow(QWidget,Ui_AddItemWindow):
                 cv2.imwrite(img_path,self.img_lasted)
 
                 json_path="C:\\Users\\Public\\Documents\\SSH\\img_js\\"+str(int(timestamp))+".json"
-                file = open(json_path, "w")
+                file = open(json_path, "w",encoding='utf-8')
 
                 WQd={}
                 WQd['img_path']=img_path
@@ -134,7 +134,7 @@ class AddItemWindow(QWidget,Ui_AddItemWindow):
                 #json_path = self.args.all_json_data[self.row]['']  "C:\\Users\\Public\\Documents\\SSH\\img_js\\"+str(int(timestamp))+".json"
                 json_path = "C:\\Users\\Public\\Documents\\SSH\\img_js\\" + str(int(self.args.all_json_data[self.row]['date'])) + ".json"
                 print(json_path)
-                file = open(json_path, "w")
+                file = open(json_path, "w",encoding='utf-8')
 
 
 
@@ -197,7 +197,7 @@ class WQbWindow(QWidget,Ui_WQbWindow):
 
                 try:
                     # 打开并读取文件
-                    with open(file_path, 'r') as f:
+                    with open(file_path, 'r',encoding='utf-8') as f:
                         # if not os.path.getsize(file_path) == 0:
                         data = json.load(f)
                         self.all_json_data.append(data)  # 存入第一个容器
