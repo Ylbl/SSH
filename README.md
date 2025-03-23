@@ -19,6 +19,11 @@
   ```cmd
   https://www.anaconda.com/download
   ```
+- 使用此连接直接下载
+  
+  ```cmd
+  https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Windows-x86_64.exe
+  ```
   
   或使用库里提供的离线包
 - 安装后在侧边栏找到 `Anaconda Prompt`
