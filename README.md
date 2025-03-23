@@ -1,6 +1,6 @@
 # 欢迎使用 SSH(Student Studying Helper)
 
-[SSH](https://github.com/Ylbl/SSH)，是一个基于 `Mediapipe` 和`PyQt` 的视觉辅助学习监督软件.支持根据手部存在性判断学习行为;远程通知;错题本等功能,外设仅需一个摄像头,可以调用手机摄像头,如果没有专门配备的话
+[SSH](https://github.com/Ylbl/SSH)，是一个基于 `Mediapipe` 和 `PyQt` 的视觉辅助学习监督软件.支持根据手部存在性判断学习行为;远程通知;错题本等功能,外设仅需一个摄像头,可以调用手机摄像头,如果没有专门配备的话
 
 ---
 
