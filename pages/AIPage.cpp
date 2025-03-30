@@ -12,7 +12,7 @@
 AIPage::AIPage(QWidget *parent)
 	: BasePage(parent)
 {
-    but = new ElaPushButton("测试按钮1", this);
+    but = new ElaPushButton("测试按钮", this);
 
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("学习");
