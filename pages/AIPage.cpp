@@ -45,8 +45,8 @@ AIPage::AIPage(QWidget *parent)
     toggleButtonLayout->addWidget(tbnt_start);
 #pragma endregion
 
-
-    QHBoxLayout* config_column = new QHBoxLayout();
+    ElaScrollPageArea* config_column_area = new ElaScrollPageArea(this);
+    QHBoxLayout* config_column = new QHBoxLayout(config_column_area);
     config_column->addLayout(comboBoxLayout);
     config_column->addLayout(multiSelectComboBoxLayout);
     toggleButtonLayout->setContentsMargins(15, 0, 0, 0);
@@ -61,7 +61,7 @@ AIPage::AIPage(QWidget *parent)
     QVBoxLayout* centerVLayout = new QVBoxLayout(centralWidget);
     centerVLayout->setSpacing(0);
     centerVLayout->setContentsMargins(0, 0, 0, 0);
-    centerVLayout->addLayout(config_column);
+    centerVLayout->addWidget(config_column_area);
     centerVLayout->addStretch();
     this->addCentralWidget(centralWidget);
 }
