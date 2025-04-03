@@ -12,6 +12,7 @@
 AIPage::AIPage(QWidget *parent)
 	: BasePage(parent)
 {
+#pragma region 配置栏
 #pragma region 选择框
     cbox_select_camera = new ElaComboBox(this);
     QStringList comboList{ };
@@ -25,7 +26,8 @@ AIPage::AIPage(QWidget *parent)
 
 #pragma region 选择框
     mcbox_select_model = new ElaMultiSelectComboBox(this);
-    QStringList multiComboList{ };
+    mcbox_select_model->setMinimumWidth(250);
+    QStringList multiComboList{ "Medieapipe","YOLO"};
     QStringList multiSelectComboList{ };
     mcbox_select_model->addItems(multiComboList);
     mcbox_select_model->setCurrentSelection(multiSelectComboList);
@@ -43,7 +45,7 @@ AIPage::AIPage(QWidget *parent)
     toggleButtonLayout->addWidget(tbnt_start);
 #pragma endregion
 
-#pragma region L_配置栏
+
     QHBoxLayout* config_column = new QHBoxLayout();
     config_column->addLayout(comboBoxLayout);
     config_column->addLayout(multiSelectComboBoxLayout);
@@ -51,6 +53,8 @@ AIPage::AIPage(QWidget *parent)
     config_column->addLayout(toggleButtonLayout);
     config_column->addStretch(1);
 #pragma endregion
+
+
 
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("学习");
