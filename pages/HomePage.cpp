@@ -57,7 +57,7 @@ HomePage::HomePage(QWidget *parent)
     urlCard1->setUrl("https://github.com/Liniyous/ElaWidgetTools");
     urlCard1->setCardPixmap(QPixmap(":/Resource/Image/github.png"));
     urlCard1->setTitle("开源地址");
-    urlCard1->setSubTitle("SSH将尽其所能帮助您");
+    urlCard1->setSubTitle("SSH 遵守宽松的 MIT 开源协议");
     ElaToolTip* urlCard1ToolTip = new ElaToolTip(urlCard1);
     urlCard1ToolTip->setToolTip("https://github.com/Liniyous/ElaWidgetTools");
 
@@ -67,7 +67,7 @@ HomePage::HomePage(QWidget *parent)
     urlCard2->setTitlePixelSize(17);
     urlCard2->setTitleSpacing(25);
     urlCard2->setSubTitleSpacing(13);
-    urlCard2->setUrl("https://space.bilibili.com/21256707");
+    urlCard2->setUrl("https://qm.qq.com/cgi-bin/qm/qr?k=mlA6AvjkRdQrYiIqNxa1qlwFhPLz6Pfr");
     urlCard2->setCardPixmap(QPixmap(":/Resource/me.png"));
     urlCard2->setTitle("联系方式");
     urlCard2->setSubTitle("QQ:1278309552");
@@ -120,7 +120,7 @@ HomePage::HomePage(QWidget *parent)
 
     // ElaFlowLayout
     ElaPopularCard* homeCard = new ElaPopularCard(this);
-    connect(homeCard, &ElaPopularCard::popularCardButtonClicked, this, [=]() {QDesktopServices::openUrl(QUrl("https://github.com/Liniyous/ElaWidgetTools"));});
+    connect(homeCard, &ElaPopularCard::popularCardButtonClicked, this, [=]() {Q_EMIT signal_go_to_AIPage();});
     homeCard->setCardPixmap(QPixmap(":/Resource/Image/control/IconElement.png"));
     homeCard->setTitle("开始学习");
     homeCard->setSubTitle("5.0⭐ 实用工具");
@@ -129,7 +129,7 @@ HomePage::HomePage(QWidget *parent)
     homeCard->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_3+.svg.png"));
 
     ElaPopularCard* homeCard1 = new ElaPopularCard(this);
-    connect(homeCard1, &ElaPopularCard::popularCardButtonClicked, this, [=]() {  Q_EMIT test1();});
+    connect(homeCard1, &ElaPopularCard::popularCardButtonClicked, this, [=]() {  Q_EMIT signal_go_to_WQBPage();});
     homeCard1->setCardPixmap(QPixmap(":/Resource/Image/control/InputValidation.png"));
     homeCard1->setTitle("开始整理错题");
     homeCard1->setSubTitle("5.0⭐ 实用工具");

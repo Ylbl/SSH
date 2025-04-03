@@ -229,5 +229,6 @@
         <file>Resource/Image/control/WebView.png</file>
         <file>Resource/Image/control/XamlUICommand.png</file>
         <file>Resource/b.png</file>
+        <file>Resource/OpenSource.png</file>
     </qresource>
 </RCC>

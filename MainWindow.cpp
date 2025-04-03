@@ -22,9 +22,9 @@ void MainWindow::initWindow()
     // setIsNavigationBarEnable(false);
     // setNavigationBarDisplayMode(ElaNavigationType::Compact);
     // setWindowButtonFlag(ElaAppBarType::MinimizeButtonHint, false);
-    setUserInfoCardPixmap(QPixmap(":/Resource/me.png"));
-    setUserInfoCardTitle("XiaoMing");
-    setUserInfoCardSubTitle("oym700814@gmail.com");
+    setUserInfoCardPixmap(QPixmap(":/Resource/OpenSource.png"));
+    setUserInfoCardTitle("SSH");
+    setUserInfoCardSubTitle("欢迎使用");
     setWindowTitle("主页");
     // setIsStayTop(true);
     // setUserInfoCardVisible(false);
@@ -45,8 +45,12 @@ void MainWindow::initContent()
 
     addFooterNode("设置", _SettingPage, _settingKey, 0, ElaIconType::GearComplex);
 
-    connect(_HomePage, &HomePage::test1, this, [=]() {
-        ElaMessageBar::success(ElaMessageBarType::BottomRight, "Success", "初始化成功!", 2000);
+    //page.h 声明  page.cpp实现  此处连接
+    connect(_HomePage, &HomePage::signal_go_to_AIPage, this, [=]() {
+        this->navigation(_AIPage->property("ElaPageKey").toString());
+        });
+    connect(_HomePage, &HomePage::signal_go_to_WQBPage, this, [=]() {
+        this->navigation(_WQBPage->property("ElaPageKey").toString());
         });
 }
 
