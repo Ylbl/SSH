@@ -5,6 +5,7 @@
 #include <ElaComboBox.h>
 #include <ElaMultiSelectComboBox.h>
 #include <ElaToggleButton.h>
+#include <QLabel>
 
 class ElaPushButton;
 
@@ -16,6 +17,8 @@ private:
 	ElaMultiSelectComboBox* mcbox_select_model;
 	ElaToggleButton* tbnt_start;
 	ElaPushButton* btn_select_model;
+
+	QLabel* img;
 public:
 	Q_INVOKABLE explicit AIPage(QWidget *parent);
 	~AIPage();

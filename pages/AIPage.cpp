@@ -47,6 +47,8 @@ AIPage::AIPage(QWidget *parent)
 
     ElaScrollPageArea* config_column_area = new ElaScrollPageArea(this);
     QHBoxLayout* config_column = new QHBoxLayout(config_column_area);
+    
+    config_column_area->setFixedHeight(60);
     config_column->addLayout(comboBoxLayout);
     config_column->addLayout(multiSelectComboBoxLayout);
     toggleButtonLayout->setContentsMargins(15, 0, 0, 0);
@@ -54,15 +56,30 @@ AIPage::AIPage(QWidget *parent)
     config_column->addStretch(1);
 #pragma endregion
 
+#pragma region 图像栏
+    img = new QLabel("画面将在此处呈现", this);//定义
+    img->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);//设置铺满
+    img->setAlignment(Qt::AlignCenter);//设置居中
+    QHBoxLayout* imgLayout = new QHBoxLayout();
+    imgLayout->addWidget(img);
+
+
+    QWidget* img_area = new QWidget(this);
+    img_area->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    QVBoxLayout* img_column = new QVBoxLayout(img_area);
+    img_column->addLayout(imgLayout);
+#pragma endregion
 
 
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("学习");
     QVBoxLayout* centerVLayout = new QVBoxLayout(centralWidget);
-    centerVLayout->setSpacing(0);
-    centerVLayout->setContentsMargins(0, 0, 0, 0);
+    centerVLayout->setSpacing(5);
+    //centerVLayout->setContentsMargins(0, 0, 0, 0);
     centerVLayout->addWidget(config_column_area);
-    centerVLayout->addStretch();
+    centerVLayout->addWidget(img_area,1);//铺满
+    //centerVLayout->addStretch();
+    
     this->addCentralWidget(centralWidget);
 }
 
