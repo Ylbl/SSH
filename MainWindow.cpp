@@ -1,5 +1,6 @@
 ﻿#include "MainWindow.h"
 #include <ElaMessageBar.h>
+#include <ElaTheme.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : ElaWindow(parent)
@@ -18,7 +19,7 @@ void MainWindow::initWindow()
     //setWindowIcon(QIcon(":/include/Image/Cirno.jpg"));
     resize(1200, 740);
     // ElaLog::getInstance()->initMessageLog(true);
-    // eTheme->setThemeMode(ElaThemeType::Dark);
+     eTheme->setThemeMode(ElaThemeType::Dark);
     // setIsNavigationBarEnable(false);
     // setNavigationBarDisplayMode(ElaNavigationType::Compact);
     // setWindowButtonFlag(ElaAppBarType::MinimizeButtonHint, false);
