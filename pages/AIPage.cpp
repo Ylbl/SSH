@@ -72,6 +72,7 @@ AIPage::AIPage(QWidget *parent)
 
 
     QWidget* centralWidget = new QWidget(this);
+
     centralWidget->setWindowTitle("学习");
     QVBoxLayout* centerVLayout = new QVBoxLayout(centralWidget);
     centerVLayout->setSpacing(5);
