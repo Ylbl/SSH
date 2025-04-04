@@ -5,7 +5,6 @@
 #include "AIPage.h"
 #include "HomePage.h"
 #include "WQBPage.h"
-
 #include "SettingPage.h"
 
 class AIPage;

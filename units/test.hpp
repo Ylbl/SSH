@@ -7,15 +7,6 @@ int test1() {
 
     bool runOnGPU = false;
 
-    //
-    // Pass in either:
-    //
-    // "yolov8s.onnx" or "yolov5s.onnx"
-    //
-    // To run Inference with yolov8/yolov5 (ONNX)
-    //
-
-    // Note that in this example the classes are hard-coded and 'classes.txt' is a place holder.
     Inference inf(projectBasePath + "/yolo11s.onnx", cv::Size(640, 640), projectBasePath+"classes.txt", runOnGPU);
 
     std::vector<std::string> imageNames;

@@ -78,5 +78,8 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Widgets
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/ElaWidgetTools.lib
         ${OpenCV_LIBS}
+        
 )
+
+target_link_options(SSH PRIVATE "/SUBSYSTEM:CONSOLE")
 

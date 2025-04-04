@@ -7,8 +7,9 @@
 #include <ElaToggleButton.h>
 #include <QLabel>
 #include <qthread.h>
+#include "opencv2/opencv.hpp"
+#include "inference.h"
 
-class ElaPushButton;
 
 class AIPage  : public BasePage
 {
@@ -17,22 +18,26 @@ private:
 	ElaComboBox* cbox_select_camera;
 	ElaMultiSelectComboBox* mcbox_select_model;
 	ElaToggleButton* tbnt_start;
-	ElaPushButton* btn_select_model;
 	QLabel* label_img;
 	QImage* image_img = new QImage();
 	int crmera_index = 0;
-
+	cv::VideoCapture cap;
+	Inference* inf;
+	QStringList* result_list;
 	QStringList* comboList;
+
+	bool running;
 public:
 	Q_INVOKABLE explicit AIPage(QWidget *parent);
 	~AIPage();
 
 	void init_camera();
-};
 
+	void init_ai();
+	void run_ai();
 
-class Worker : public QThread
-{
-public:
-	void run(int _crmera_index,QImage* _image_img,QStringList* _result_list);
+	QImage matToQImage(const cv::Mat& mat);
+
+protected:
+	void resizeEvent(QResizeEvent* event);
 };
