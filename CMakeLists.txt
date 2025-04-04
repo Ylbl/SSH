@@ -8,14 +8,25 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(openCV_DIR C:/opencv/build)
+
+include_directories(
+    ${openCV_DIR}/include
+)
+link_directories(
+    ${openCV_DIR}/lib
+)
 include_directories(
     include
 )
 include_directories(
     pages
 )
+include_directories(
+    units
+)
 
-
+find_package(OpenCV REQUIRED)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR}
     COMPONENTS
@@ -30,7 +41,9 @@ set(PROJECT_SOURCES
     MainWindow.ui
     MainWindow.h
     MainWindow.cpp
+
     include/ElaWidgetTools.qrc
+
     ./pages/AIpage.h
     ./pages/AIpage.cpp
     ./pages/BasePage.h
@@ -42,6 +55,11 @@ set(PROJECT_SOURCES
     
     ./pages/SettingPage.h
     ./pages/SettingPage.cpp
+    
+    ./units/test.hpp
+    ./units/inference.h
+    ./units/inference.cpp
+    
 )
 
 qt_add_executable(SSH
@@ -59,5 +77,6 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Gui
         Qt::Widgets
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/ElaWidgetTools.lib
+        ${OpenCV_LIBS}
 )
 
