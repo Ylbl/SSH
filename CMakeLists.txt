@@ -25,7 +25,11 @@ include_directories(
 include_directories(
     units
 )
+include_directories(
+    include/smtp
+)
 
+find_package(Qt6 COMPONENTS Network REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR}
@@ -59,6 +63,48 @@ set(PROJECT_SOURCES
     ./units/test.hpp
     ./units/inference.h
     ./units/inference.cpp
+
+    ./units/send_email.hpp
+
+    ./include/smtp/emailaddress.cpp
+    ./include/smtp/mimeattachment.cpp
+    ./include/smtp/mimebytearrayattachment.cpp
+    ./include/smtp/mimefile.cpp
+    ./include/smtp/mimehtml.cpp
+    ./include/smtp/mimeinlinefile.cpp
+    ./include/smtp/mimemessage.cpp
+    ./include/smtp/mimepart.cpp
+    ./include/smtp/mimetext.cpp
+    ./include/smtp/smtpclient.cpp
+    ./include/smtp/quotedprintable.cpp
+    ./include/smtp/mimemultipart.cpp
+    ./include/smtp/mimecontentencoder.cpp
+    ./include/smtp/mimebase64encoder.cpp
+    ./include/smtp/mimeqpencoder.cpp
+    ./include/smtp/mimeqpformatter.cpp
+    ./include/smtp/mimebase64formatter.cpp
+    ./include/smtp/mimecontentformatter.cpp
+    ./include/smtp/emailaddress.h
+    ./include/smtp/mimeattachment.h
+    ./include/smtp/mimebytearrayattachment.h
+    ./include/smtp/mimefile.h
+    ./include/smtp/mimehtml.h
+    ./include/smtp/mimeinlinefile.h
+    ./include/smtp/mimemessage.h
+    ./include/smtp/mimepart.h
+    ./include/smtp/mimetext.h
+    ./include/smtp/smtpclient.h
+    ./include/smtp/SmtpMime
+    ./include/smtp/quotedprintable.h
+    ./include/smtp/mimemultipart.h
+    ./include/smtp/smtpmime_global.h
+    ./include/smtp/mimecontentencoder.h
+    ./include/smtp/mimebase64encoder.h
+    ./include/smtp/mimeqpencoder.h
+    ./include/smtp/mimeqpformatter.h
+    ./include/smtp/mimebase64formatter.h
+    ./include/smtp/mimecontentformatter.h
+    
     
 )
 
@@ -76,6 +122,7 @@ target_link_libraries(${PROJECT_NAME}
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt6::Network
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/ElaWidgetTools.lib
         ${OpenCV_LIBS}
         

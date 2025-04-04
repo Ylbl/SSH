@@ -9,7 +9,7 @@
 #include <qthread.h>
 #include "opencv2/opencv.hpp"
 #include "inference.h"
-
+#include "qtimer.h"
 
 class AIPage  : public BasePage
 {
@@ -22,9 +22,10 @@ private:
 	QImage* image_img = new QImage();
 	int crmera_index = 0;
 	cv::VideoCapture cap;
-	Inference* inf;
+	Inference* inf_cpu;
 	QStringList* result_list;
 	QStringList* comboList;
+	QStringList* detectedObjects = new QStringList();
 
 	bool running;
 public:
@@ -33,11 +34,13 @@ public:
 
 	void init_camera();
 
-	void init_ai();
-	void run_ai();
+	void init_ai_cpu();
+	void run_ai_cpu();
+	std::vector<Detection> process_cpu(cv::Mat* img);
 
 	QImage matToQImage(const cv::Mat& mat);
-
-protected:
 	void resizeEvent(QResizeEvent* event);
+
+	void check_rest_time();
+	void check_object();
 };

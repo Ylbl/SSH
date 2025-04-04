@@ -12,7 +12,6 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QVBoxLayout>
-
 #include "ElaAcrylicUrlCard.h"
 #include "ElaFlowLayout.h"
 #include "ElaImageCard.h"
@@ -36,13 +35,15 @@ WQBPage::WQBPage(QWidget *parent)
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("错题本");
 
+
+    
+
+
     QVBoxLayout* centerVLayout = new QVBoxLayout(centralWidget);
     centerVLayout->setSpacing(0);
     centerVLayout->setContentsMargins(0, 0, 0, 0);
-    centerVLayout->addWidget(but);
+    //centerVLayout->addWidget(but);
     centerVLayout->addStretch();
-
-
     this->addCentralWidget(centralWidget);
 }
 
