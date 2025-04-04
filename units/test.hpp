@@ -69,14 +69,8 @@ int test1() {
         float scale = 0.8;
         cv::resize(frame, frame, cv::Size(frame.cols * scale, frame.rows * scale));
         cv::imshow("Inference", frame);
-
-
-        // 按键退出显示;
-        if (waitKey(30) >= 0) break;
+        waitKey(10);
     }
-
-    // 5.释放视频采集对象;
-    cap.release();
 
     return 0;
 }
