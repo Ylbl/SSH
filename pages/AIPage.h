@@ -6,7 +6,10 @@
 #include <ElaMultiSelectComboBox.h>
 #include <ElaToggleButton.h>
 #include <QLabel>
+#include <QMutex>
 #include <qthread.h>
+#include <SFML/Audio/Music.hpp>
+
 #include "opencv2/opencv.hpp"
 #include "inference.h"
 #include "qtimer.h"
@@ -26,8 +29,14 @@ private:
 	QStringList* result_list;
 	QStringList* comboList;
 	QStringList* detectedObjects = new QStringList();
+	sf::Music music;
+
+
+
 
 	bool running;
+	//std::atomic<bool> running{true};
+	std::atomic<bool> is_play{false};
 public:
 	Q_INVOKABLE explicit AIPage(QWidget *parent);
 	~AIPage();

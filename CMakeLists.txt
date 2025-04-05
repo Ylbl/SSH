@@ -32,6 +32,7 @@ include_directories(
 find_package(mailio CONFIG REQUIRED)
 find_package(boost_system CONFIG REQUIRED)
 find_package(boost_date_time CONFIG REQUIRED)
+find_package(SFML COMPONENTS Network Graphics Window Audio System CONFIG REQUIRED)
 
 
 
@@ -83,6 +84,7 @@ set_target_properties(${PROJECT_NAME}
     PROPERTIES
         WIN32_EXECUTABLE TRUE
 )
+target_link_libraries(${PROJECT_NAME} PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
 target_link_libraries(${PROJECT_NAME} PRIVATE Boost::date_time)
 target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system)
 target_link_libraries(${PROJECT_NAME} PRIVATE mailio)

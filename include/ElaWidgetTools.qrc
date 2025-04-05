@@ -230,5 +230,6 @@
         <file>Resource/Image/control/XamlUICommand.png</file>
         <file>Resource/b.png</file>
         <file>Resource/OpenSource.png</file>
+        <!--<file>music/Lovely_Picnic.wav</file>-->
     </qresource>
 </RCC>
