@@ -13,7 +13,7 @@
 #include <ElaMessageBar.h>
 #include <inference.h>
 #include <thread>
-#include <algorithm> 
+#include <algorithm>
 #include <QResizeEvent>
 #include "send_email.hpp"
 
@@ -260,246 +260,33 @@ void AIPage::check_rest_time()
 }
 void AIPage::check_object()
 {
-	qDebug() << "2";
+	std::atomic<bool> t_is_send(true);
 
-	std::atomic<bool> t_running(true);
-
+	int i = 10;
 	std::thread* t_send_email = new std::thread([&] {
-		int i = 0;
+
 		while (true) {
-			if (!t_running.load()) {
+			qDebug()<<i;
+			if (!t_is_send.load()) {
 				continue;
 			}
-			qDebug() << "1";
-			if (i == 0 || !detectedObjects->contains("person")) {
-				qDebug() << "s1";
+			if (i == 0 && t_is_send.load()) {
 				send_email();
-				qDebug() << "s";
-				break;
+				i=10;
+				continue;
 			}
 			i--;
-			//Sleep(1000);
+			Sleep(1000);
 		}
 		});
 	t_send_email->detach();
-	
+
 	while (running) {
-		/*if (!detectedObjects->contains("person") || detectedObjects->contains("bottle")) {
-			running = true;
+		if (!detectedObjects->contains("person") || detectedObjects->contains("bottle")) {
+			t_is_send.store(true);
 		}
 		else {
-			running = false;
-		}*/
-		//running = true;
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+			t_is_send.store(false);
+		}
 	}
 }
-//void Worker::run()
-//{
-//    while (true)
-//    {
-//        if (!running) {
-//            break;
-//        }
-//        // 获取新的一帧;
-//        Mat frame;
-//        cap >> frame;
-//        if (frame.empty())
-//            return;
-//
-//        std::vector<Detection> output = inf->runInference(frame);
-//
-//        int detections = output.size();
-//
-//        for (int i = 0; i < detections; ++i)
-//        {
-//            Detection detection = output[i];
-//
-//            cv::Rect box = detection.box;
-//            cv::Scalar color = detection.color;
-//
-//            // Detection box
-//            cv::rectangle(frame, box, color, 2);
-//
-//            // Detection box text
-//            std::string classString = detection.className + ' ' + std::to_string(detection.confidence).substr(0, 4);
-//            cv::Size textSize = cv::getTextSize(classString, cv::FONT_HERSHEY_DUPLEX, 1, 2, 0);
-//            cv::Rect textBox(box.x, box.y - 40, textSize.width + 10, textSize.height + 20);
-//
-//            cv::rectangle(frame, textBox, color, cv::FILLED);
-//            cv::putText(frame, classString, cv::Point(box.x + 5, box.y - 10), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0, 0, 0), 2, 0);
-//        }
-//        // Inference ends here...
-//
-//        // This is only for preview purposes
-//        float scale = 0.8;
-//        cv::resize(frame, frame, cv::Size(frame.cols * scale, frame.rows * scale));
-//        cv::imshow("Inference", frame);
-//        waitKey(10);
-//    }
-//}
-//
-//void Worker::init(QImage* _image_img, QStringList* _result_list, int* _crmera_index)
-//{
-//    image_img = _image_img;
-//    result_list = _result_list;
-//    crmera_index = _crmera_index;
-//
-//    if (cap.isOpened()) {
-//        cap.release();
-//    }
-//
-//    cap.open(*crmera_index);
-//
-//    std::string projectBasePath = "C:/Users/O/source/repos/Program/SSH/out/build/release/models"; // Set your ultralytics base path
-//
-//    bool runOnGPU = false;
-//
-//    inf=new Inference(projectBasePath + "/yolo11s.onnx", cv::Size(640, 640), projectBasePath + "/classes.txt", runOnGPU);
-//}
-// BottomWidget.cpp
-//void AIPage::resizeEvent(QResizeEvent* event) {
-//    QWidget::resizeEvent(event); // 必须调用父类实现[3](@ref)
-//
-//    // 动态计算label尺寸（示例：保持label为父容器的80%大小）
-//    const float scale = 0.8f;
-//    QSize newSize = event->size() * scale;
-//
-//    // 两种定位方式任选其一：
-//
-//    // 方式1：保持居中
-//    label_img->setFixedSize(newSize);
-//    label_img->move((width() - newSize.width()) / 2,
-//        (height() - newSize.height()) / 2);
-//
-//    // 方式2：贴底边距10像素
-//    // label->setFixedWidth(width() - 20);
-//    // label->move(10, height() - label->height() - 10);
-//
-//    qDebug() << "Resized to:" << event->size(); // 调试输出[7](@ref)
-//}
-//void AIPage::run_ai()
-//{
-//    while(running)
-//    {
-//        Mat frame;
-//        cap >> frame;
-//        if (frame.empty())
-//            return;
-//
-//        std::vector<Detection> output = inf->runInference(frame);
-//
-//        int detections = output.size();
-//
-//        for (int i = 0; i < detections; ++i)
-//        {
-//            Detection detection = output[i];
-//
-//            cv::Rect box = detection.box;
-//            cv::Scalar color = detection.color;
-//
-//            // Detection box
-//            cv::rectangle(frame, box, color, 2);
-//
-//            // Detection box text
-//            std::string classString = detection.className + ' ' + std::to_string(detection.confidence).substr(0, 4);
-//            cv::Size textSize = cv::getTextSize(classString, cv::FONT_HERSHEY_DUPLEX, 1, 2, 0);
-//            cv::Rect textBox(box.x, box.y - 40, textSize.width + 10, textSize.height + 20);
-//
-//            cv::rectangle(frame, textBox, color, cv::FILLED);
-//            cv::putText(frame, classString, cv::Point(box.x + 5, box.y - 10), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0, 0, 0), 2, 0);
-//        }
-//        // Inference ends here...
-//
-//        // This is only for preview purposes
-//        float scale = 1;
-//        cv::resize(frame, frame, cv::Size(frame.cols * scale, frame.rows * scale));
-//        //cv::imshow("Inference", frame);
-//
-//
-//        cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
-//        QImage img(frame.data,
-//            frame.cols,
-//            frame.rows,
-//            frame.step,
-//            QImage::Format_RGB888);
-//
-//        // 深拷贝图像数据
-//        QPixmap pixmap = QPixmap::fromImage(img.copy());
-//
-//        label_img->setPixmap(pixmap);
-//        waitKey(2);
-//    }
-//}
-//void AIPage::run_ai()
-//{
-//    const int MODEL_INPUT_SIZE = 640;
-//    float scale_ratio = 1.0f;
-//    int pad_left = 0, pad_top = 0;
-//
-//    while (running)
-//    {
-//        Mat frame;
-//        cap >> frame;
-//        if (frame.empty()) break;
-//
-//        // 1. 保持比例的预处理
-//        Mat processed;
-//        int orig_w = frame.cols, orig_h = frame.rows;
-//        scale_ratio = std::min(
-//            MODEL_INPUT_SIZE / (float)orig_w,
-//            MODEL_INPUT_SIZE / (float)orig_h
-//        );
-//        cv::resize(frame, processed, cv::Size(), scale_ratio, scale_ratio); // 等比例缩放
-//
-//        // 计算填充参数（网页3）
-//        pad_left = (MODEL_INPUT_SIZE - processed.cols) / 2;
-//        pad_top = (MODEL_INPUT_SIZE - processed.rows) / 2;
-//        cv::copyMakeBorder(processed, processed, pad_top,
-//            MODEL_INPUT_SIZE - processed.rows - pad_top,
-//            pad_left, MODEL_INPUT_SIZE - processed.cols - pad_left,
-//            BORDER_CONSTANT);
-//
-//        // 2. 执行推理
-//        auto output = inf->runInference(processed);
-//
-//        // 3. 精准坐标映射（网页4）
-//        for (auto& detection : output)
-//        {
-//            cv::Rect& box = detection.box;
-//            // 显式转换为float类型并统一参数类型[2,3](@ref)
-//            float x = (box.x - pad_left) / scale_ratio;
-//            float y = (box.y - pad_top) / scale_ratio;
-//            float w = box.width / scale_ratio;
-//            float h = box.height / scale_ratio;
-//
-//            // 统一参数类型为float并添加epsilon防止溢出[6](@ref)
-//            const float epsilon = 1e-6f;
-//            box.x = std::clamp(x, 0.0f, static_cast<float>(orig_w - 1) - epsilon);
-//            box.y = std::clamp(y, 0.0f, static_cast<float>(orig_h - 1) - epsilon);
-//            box.width = std::clamp(w, epsilon, static_cast<float>(orig_w) - box.x - epsilon);
-//            box.height = std::clamp(h, epsilon, static_cast<float>(orig_h) - box.y - epsilon);
-//
-//            // 绘制检测结果
-//            cv::rectangle(frame, box, detection.color, 2);
-//            std::string text = detection.className + " " + std::to_string(detection.confidence).substr(0, 4);
-//            cv::putText(frame, text, cv::Point(box.x, box.y - 5),
-//                FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
-//        }
-//
-//        // 4. 线程安全显示（网页2、网页5）
-//        QImage displayImg = matToQImage(frame).copy(); // 深拷贝避免资源竞争
-//        QMetaObject::invokeMethod(label_img, [this, displayImg]() {
-//            QPixmap pixmap = QPixmap::fromImage(displayImg);
-//            // 动态适应窗口尺寸的缩放（网页7）
-//            pixmap = pixmap.scaled(
-//                label_img->size(),
-//                Qt::KeepAspectRatio,  // 强制保持宽高比
-//                Qt::SmoothTransformation // 平滑缩小处理
-//            );
-//            label_img->setPixmap(pixmap);
-//            });
-//
-//        cv::waitKey(2);
-//    }
-//}

@@ -1,7 +1,7 @@
 ﻿#include "MainWindow.h"
 #include <ElaMessageBar.h>
 #include <ElaTheme.h>
-#include "test.hpp"
+
 MainWindow::MainWindow(QWidget *parent)
     : ElaWindow(parent)
 {
@@ -12,9 +12,10 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {}
 
+
 void MainWindow::initWindow()
 {
-    
+
     // setIsEnableMica(true);
     // setIsCentralStackedWidgetTransparent(true);
     //setWindowIcon(QIcon(":/include/Image/Cirno.jpg"));

@@ -1,99 +1,74 @@
-#pragma once
+# ifndef  SEND_EMAIL_HPP
+#define SEND_EMAIL_HPP
 
-#include <QtCore>
-#include "SmtpMime"
+#include <iostream>
+#include <mailio/message.hpp>
+#include <mailio/smtp.hpp>
+
+using mailio::message;
+using mailio::mail_address;
+using mailio::smtps;
+using mailio::smtp_error;
+using mailio::dialog_error;
+using std::cout;
+using std::endl;
 
 
-int send_email(QString _sender, QString _to,QString _subject,QString _text,QString _smtp="smtp.qq.com")
+int send_email(std::string _sender, std::string _to,std::string _subject,std::string _text,std::string _smtp="smtp.qq.com")
 {
-    MimeMessage message;
+    try
+    {
+        // create mail message
+        message msg;
+        msg.from(mail_address("SSH", _sender));// set the correct sender name and address
+        msg.add_recipient(mail_address("SSH", _to));// set the correct recipent name and address
+        msg.subject(_subject);
+        msg.content(_text);
 
-    EmailAddress sender(_sender, "SSH");
-    message.setSender(sender);
-
-    EmailAddress to(_to, " ");
-    message.addRecipient(to);
-
-    message.setSubject(_subject);
-
-    // Now add some text to the email.
-    // First we create a MimeText object.
-
-    MimeText text;
-
-    text.setText(_text);
-
-    // Now add it to the mail
-
-    message.addPart(&text);
-
-    // Now we can send the mail
-    SmtpClient smtp(_smtp, 465, SmtpClient::SslConnection);
-
-    smtp.connectToHost();
-    if (!smtp.waitForReadyConnected()) {
-        qDebug() << "Failed to connect to host!";
-        return -1;
+        // connect to server
+        smtps conn(_smtp, 587);
+        // modify username/password to use real credentials
+        conn.authenticate("1278309552@qq.com", "ytgdxyosqhnajhih", smtps::auth_method_t::START_TLS);
+        conn.submit(msg);
+    }
+    catch (smtp_error& exc)
+    {
+        cout << exc.what() << endl;
+    }
+    catch (dialog_error& exc)
+    {
+        cout << exc.what() << endl;
     }
 
-    smtp.login("1278309552@qq.com", "ytgdxyosqhnajhih");
-    if (!smtp.waitForAuthenticated()) {
-        qDebug() << "Failed to login!";
-        return -2;
-    }
-
-    smtp.sendMail(message);
-    if (!smtp.waitForMailSent()) {
-        qDebug() << "Failed to send mail!";
-        return -3;
-    }
-
-    smtp.quit();
+    return EXIT_SUCCESS;
 }
 
 int send_email()
 {
-    MimeMessage message;
+    try
+    {
+        // create mail message
+        message msg;
+        msg.from(mail_address("SSH", "1278309552@qq.com"));// set the correct sender name and address
+        msg.add_recipient(mail_address("SSH", "1278309552@qq.com"));// set the correct recipent name and address
+        msg.subject("tip");
+        msg.content("Hello, World!");
 
-    EmailAddress sender("1278309552@qq.com", "Your Name");
-    message.setSender(sender);
-
-    EmailAddress to("1278309552@qq.com", "Recipient's Name");
-    message.addRecipient(to);
-
-    message.setSubject("SmtpClient for Qt - Demo");
-
-    // Now add some text to the email.
-    // First we create a MimeText object.
-
-    MimeText text;
-
-    text.setText("Hi,\nThis is a simple email message.\n");
-
-    // Now add it to the mail
-
-    message.addPart(&text);
-
-    // Now we can send the mail
-    SmtpClient smtp("smtp.qq.com", 465, SmtpClient::SslConnection);
-
-    smtp.connectToHost();
-    if (!smtp.waitForReadyConnected()) {
-        qDebug() << "Failed to connect to host!";
-        return -1;
+        // connect to server
+        smtps conn("smtp.qq.com", 587);
+        // modify username/password to use real credentials
+        conn.authenticate("1278309552@qq.com", "ytgdxyosqhnajhih", smtps::auth_method_t::START_TLS);
+        conn.submit(msg);
+    }
+    catch (smtp_error& exc)
+    {
+        cout << exc.what() << endl;
+    }
+    catch (dialog_error& exc)
+    {
+        cout << exc.what() << endl;
     }
 
-    smtp.login("1278309552@qq.com", "ytgdxyosqhnajhih");
-    if (!smtp.waitForAuthenticated()) {
-        qDebug() << "Failed to login!";
-        return -2;
-    }
-
-    smtp.sendMail(message);
-    if (!smtp.waitForMailSent()) {
-        qDebug() << "Failed to send mail!";
-        return -3;
-    }
-
-    smtp.quit();
+    return EXIT_SUCCESS;
 }
+#endif
