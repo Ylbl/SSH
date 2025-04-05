@@ -70,7 +70,8 @@ set(PROJECT_SOURCES
     ./units/inference.h
     ./units/inference.cpp
     ./units/send_email.hpp
-
+        units/MyConfig.cpp
+        units/MyConfig.h
 
 
 )

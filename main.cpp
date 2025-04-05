@@ -1,11 +1,11 @@
 #include "MainWindow.h"
 #include <QtWidgets/QApplication>
-
-#include "config.hpp"
 #include "ElaApplication.h"
-MC::mConfig MC::mConfig::mconfig;
+#include "MyConfig.h"
+MyConfig MyConfig::myconfig;
 int main(int argc, char *argv[])
 {
+    //qDebug()<<MyConfig::getInstance().my_email;
     QApplication a(argc, argv);
     eApp->init();
     MainWindow w;

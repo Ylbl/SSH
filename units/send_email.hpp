@@ -13,7 +13,7 @@ using mailio::dialog_error;
 using std::cout;
 using std::endl;
 
-#include "config.hpp"
+#include "MyConfig.h"
 
 int send_email(QString _subject,QString _content)
 {
@@ -21,15 +21,16 @@ int send_email(QString _subject,QString _content)
     {
         // create mail message
         message msg;
-        msg.from(mail_address("SSH", "1278309552@qq.com"));// set the correct sender name and address
-        msg.add_recipient(mail_address("SSH", "1278309552@qq.com"));// set the correct recipent name and address
+        //qDebug()<<MyConfig::getInstance().my_email.toStdString();
+        msg.from(mail_address("SSH", MyConfig::getInstance().my_email.toStdString()));// set the correct sender name and address
+        msg.add_recipient(mail_address("SSH", MyConfig::getInstance().to_email.toStdString()));// set the correct recipent name and address
         msg.subject(_subject.toStdString());
         msg.content(_content.toStdString());
 
         // connect to server
-        smtps conn("smtp.qq.com", 587);
+        smtps conn(MyConfig::getInstance().email_type.toStdString(), 587);
         // modify username/password to use real credentials
-        conn.authenticate("1278309552@qq.com", "ytgdxyosqhnajhih", smtps::auth_method_t::START_TLS);
+        conn.authenticate(MyConfig::getInstance().my_email.toStdString(), MyConfig::getInstance().key.toStdString(), smtps::auth_method_t::START_TLS);
         conn.submit(msg);
     }
     catch (smtp_error& exc)

@@ -22,7 +22,7 @@ using namespace cv;
 AIPage::AIPage(QWidget* parent)
 	: BasePage(parent)
 {
-	if (!music.openFromFile("C:/Users/O/CLionProjects/MyProgram/SSH/include/music/Lovely_Picnic.ogg"))
+	if (!music.openFromFile(MyConfig::getInstance().music_path.toStdString()))
 		qDebug()<<"error";
 #pragma region 配置栏
 #pragma region 选择框
@@ -46,7 +46,7 @@ AIPage::AIPage(QWidget* parent)
 	mcbox_select_model->setCurrentSelection(multiSelectComboList);
 	mcbox_select_model->setDisabled(true);
 	QHBoxLayout* multiSelectComboBoxLayout = new QHBoxLayout();
-	ElaText* multiSelectComboBoxText = new ElaText("选择启用的模型", this);
+	ElaText* multiSelectComboBoxText = new ElaText("选择启用的模型(暂不开启)", this);
 	multiSelectComboBoxText->setTextPixelSize(15);
 	multiSelectComboBoxLayout->addWidget(multiSelectComboBoxText);
 	multiSelectComboBoxLayout->addWidget(mcbox_select_model);
@@ -58,9 +58,20 @@ AIPage::AIPage(QWidget* parent)
 		//ElaMessageBar::success(ElaMessageBarType::BottomRight, "Success", QString::number(tbnt_start->getIsToggled()), 2000);
 		if (tbnt_start->getIsToggled() == 0) {
 			running = false;
+
+			std::thread t_send_email([=] {
+				send_email("提示","摄像头关闭");
+			});
+			t_send_email.detach();
 		}
 		if (tbnt_start->getIsToggled() == 1) {
 			running = true;
+
+			std::thread t_send_email([=] {
+				send_email("提示","摄像头开启");
+			});
+			t_send_email.detach();
+
 			init_ai_cpu();
 
 			std::thread t_run_ai_cpu(&AIPage::run_ai_cpu, this);
@@ -141,7 +152,7 @@ void AIPage::init_ai_cpu()
 {
 	if (!cap.isOpened())
 		cap.release();
-	std::string projectBasePath = "C:/Users/O/source/repos/Program/SSH/out/build/release/models"; // Set your ultralytics base path
+	std::string projectBasePath = MyConfig::getInstance().models_path.toStdString(); // Set your ultralytics base path
 
 	bool runOnGPU = false;
 
@@ -261,11 +272,11 @@ void AIPage::resizeEvent(QResizeEvent* event)
 
 void AIPage::check_rest_time()
 {
-	int i=10;
+	int i=MyConfig::getInstance().rest_time;
 	while (running) {
 		rest_time=i;
 		if (i==0) {
-			i=10;
+			i=MyConfig::getInstance().rest_time;
 
 			if (music.getStatus()==sf::SoundSource::Status::Playing&&running) {
 				//continue;
@@ -283,18 +294,18 @@ void AIPage::check_rest_time()
 void AIPage::check_object() {
 	std::atomic<bool> t_is_send(true);
 
-	int i = 10;
+	int i = MyConfig::getInstance().object_time;
 	std::thread *t_send_email = new std::thread([&] {
 		while (running) {
 			object_time=i;
 			//qDebug() << "object_time: " << object_time;
 			if (!t_is_send.load()) {
-				i=10;
+				i=MyConfig::getInstance().object_time;
 				//continue;
 			}
 			if (i == 0 && t_is_send.load()) {
 				send_email("tip","检测到可疑物体");
-				i = 10;
+				i = MyConfig::getInstance().object_time;
 				//continue;
 			}
 			i--;
