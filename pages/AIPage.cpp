@@ -316,7 +316,8 @@ using namespace cv;
 AIPage::AIPage(QWidget* parent)
 	: BasePage(parent)
 {
-
+	if (!music.openFromFile("C:/Users/O/CLionProjects/MyProgram/SSH/include/music/Lovely_Picnic.ogg"))
+		qDebug()<<"error";
 #pragma region 配置栏
 #pragma region 选择框
 	comboList = new QStringList();
@@ -502,6 +503,10 @@ void AIPage::run_ai_cpu()
 			std::string text = detection.className + " " + std::to_string(detection.confidence).substr(0, 4);
 			cv::putText(frame, text, cv::Point(box.x, box.y - 5),
 				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
+			cv::putText(frame, "rest_time: "+std::to_string(rest_time), cv::Point(0, 30),
+				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
+			cv::putText(frame, "object_time: "+std::to_string(object_time), cv::Point(0, 60),
+				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
 		}
 
 		// 4. 线程安全的图像显示
@@ -551,8 +556,23 @@ void AIPage::resizeEvent(QResizeEvent* event)
 
 void AIPage::check_rest_time()
 {
+	int i=10;
 	while (running) {
+		rest_time=i;
+		if (i==0) {
+			i=10;
 
+			if (music.getStatus()==sf::SoundSource::Status::Playing&&running) {
+				//continue;
+			}else {
+				music.play();
+			}
+		}
+		i--;
+		Sleep(1000);
+	}
+	if (music.getStatus()==sf::SoundSource::Status::Playing) {
+		music.stop();
 	}
 }
 void AIPage::check_object() {
@@ -560,16 +580,17 @@ void AIPage::check_object() {
 
 	int i = 10;
 	std::thread *t_send_email = new std::thread([&] {
-		while (true) {
-
+		while (running) {
+			object_time=i;
+			//qDebug() << "object_time: " << object_time;
 			if (!t_is_send.load()) {
 				i=10;
-				continue;
+				//continue;
 			}
 			if (i == 0 && t_is_send.load()) {
 				send_email();
 				i = 10;
-				continue;
+				//continue;
 			}
 			i--;
 			Sleep(1000);

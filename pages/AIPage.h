@@ -30,7 +30,8 @@ private:
 	QStringList* comboList;
 	QStringList* detectedObjects = new QStringList();
 	sf::Music music;
-
+	int rest_time = 0;
+	int object_time=0;
 
 
 
