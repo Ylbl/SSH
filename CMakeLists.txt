@@ -35,7 +35,6 @@ find_package(boost_date_time CONFIG REQUIRED)
 find_package(SFML COMPONENTS Network Graphics Window Audio System CONFIG REQUIRED)
 
 
-
 find_package(Qt6 COMPONENTS Network REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
@@ -63,17 +62,17 @@ set(PROJECT_SOURCES
     ./pages/HomePage.cpp
     ./pages/WQBPage.h
     ./pages/WQBPage.cpp
-    
+
     ./pages/SettingPage.h
     ./pages/SettingPage.cpp
-    
+
     ./units/test.hpp
     ./units/inference.h
     ./units/inference.cpp
     ./units/send_email.hpp
 
-    
-    
+
+
 )
 
 qt_add_executable(SSH
@@ -96,7 +95,7 @@ target_link_libraries(${PROJECT_NAME}
         Qt6::Network
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/ElaWidgetTools.lib
         ${OpenCV_LIBS}
-        
+
 )
 
 target_link_options(SSH PRIVATE "/SUBSYSTEM:CONSOLE")
