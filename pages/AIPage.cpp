@@ -221,9 +221,9 @@ void AIPage::run_ai_cpu()
 			cv::putText(frame, text, cv::Point(box.x, box.y - 5),
 				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
 			cv::putText(frame, "rest_time: "+std::to_string(rest_time), cv::Point(0, 30),
-				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
+				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0,0,255), 1);
 			cv::putText(frame, "object_time: "+std::to_string(object_time), cv::Point(0, 60),
-				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
+				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0,0,255), 1);
 		}
 
 		// 4. 线程安全的图像显示
