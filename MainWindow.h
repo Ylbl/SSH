@@ -6,7 +6,8 @@
 #include "HomePage.h"
 #include "WQBPage.h"
 #include "SettingPage.h"
-
+#include "ElaContentDialog.h"
+#include "UserInfoPage.h"
 class AIPage;
 class HomePage;
 class WQBPage;
@@ -29,7 +30,9 @@ public:
     WQBPage* _WQBPage{ nullptr };
     AboutPage* _AboutPage{ nullptr };
     SettingPage* _SettingPage{ nullptr };
+    UserInfoPage* _UserInfoPage{ nullptr };
 
+    ElaContentDialog* _closeDialog{nullptr};
     QString _settingKey{ "" };
 
 };

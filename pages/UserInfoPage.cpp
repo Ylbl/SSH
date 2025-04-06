@@ -1,4 +1,4 @@
-﻿#include "WQBPage.h"
+#include "UserInfoPage.h"
 #include "ElaLog.h"
 #include "ElaRadioButton.h"
 #include "ElaScrollPageArea.h"
@@ -27,11 +27,11 @@
 #include "ElaPushButton.h"
 
 
-WQBPage::WQBPage(QWidget *parent)
-	: BasePage(parent)
+UserInfoPage::UserInfoPage(QWidget *parent)
+    : BasePage(parent)
 {
     QWidget* centralWidget = new QWidget(this);
-    centralWidget->setWindowTitle("错题本");
+    centralWidget->setWindowTitle("个人数据");
 
     QFont font;
     font.setPointSize(30);
@@ -43,7 +43,7 @@ WQBPage::WQBPage(QWidget *parent)
     QHBoxLayout* text_And_edit_layout1 = new QHBoxLayout(text_area);
     text_And_edit_layout1->addWidget(text);
     text_And_edit_layout1->addStretch();
-    
+
 
 
     QVBoxLayout* centerVLayout = new QVBoxLayout(centralWidget);
@@ -54,5 +54,5 @@ WQBPage::WQBPage(QWidget *parent)
     this->addCentralWidget(centralWidget);
 }
 
-WQBPage::~WQBPage()
+UserInfoPage::~UserInfoPage()
 {}

@@ -72,6 +72,8 @@ set(PROJECT_SOURCES
     ./units/send_email.hpp
         units/MyConfig.cpp
         units/MyConfig.h
+        pages/UserInfoPage.cpp
+        pages/UserInfoPage.h
 
 
 )
@@ -99,5 +101,5 @@ target_link_libraries(${PROJECT_NAME}
 
 )
 
-target_link_options(SSH PRIVATE "/SUBSYSTEM:CONSOLE")
+#target_link_options(SSH PRIVATE "/SUBSYSTEM:CONSOLE")
 

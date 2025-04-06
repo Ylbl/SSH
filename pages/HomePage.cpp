@@ -59,7 +59,7 @@ HomePage::HomePage(QWidget *parent)
     urlCard1->setTitle("开源地址");
     urlCard1->setSubTitle("SSH 遵守宽松的 MIT 开源协议");
     ElaToolTip* urlCard1ToolTip = new ElaToolTip(urlCard1);
-    urlCard1ToolTip->setToolTip("https://github.com/Liniyous/ElaWidgetTools");
+    urlCard1ToolTip->setToolTip("https://github.com/Ylbl/SSH");
 
     ElaAcrylicUrlCard* urlCard2 = new ElaAcrylicUrlCard(this);
     urlCard2->setCardPixmapSize(QSize(62, 62));
@@ -137,11 +137,21 @@ HomePage::HomePage(QWidget *parent)
     homeCard1->setDetailedText("SSH致力于提供一站式学习服务");
     homeCard1->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_3+.svg.png"));
 
+    ElaPopularCard* homeCard2 = new ElaPopularCard(this);
+    connect(homeCard2, &ElaPopularCard::popularCardButtonClicked, this, [=]() {  Q_EMIT signal_go_to_WQBPage();});
+    homeCard2->setCardPixmap(QPixmap(":/Resource/Image/control/PersonPicture.png"));
+    homeCard2->setTitle("查看专注次数 专注学习时长等数据");
+    homeCard2->setSubTitle("5.0⭐ 实用工具");
+    homeCard2->setInteractiveTips("免费使用");
+    homeCard2->setDetailedText("SSH在本地保存并记录您的私人数据");
+    homeCard2->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_3+.svg.png"));
+
     ElaFlowLayout* flowLayout = new ElaFlowLayout(0, 5, 5);
     flowLayout->setContentsMargins(30, 0, 0, 0);
     flowLayout->setIsAnimation(true);
     flowLayout->addWidget(homeCard);
     flowLayout->addWidget(homeCard1);
+    flowLayout->addWidget(homeCard2);
 
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("Home");

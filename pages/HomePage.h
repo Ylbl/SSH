@@ -16,4 +16,5 @@ Q_SIGNALS:
 
 	Q_SIGNAL void signal_go_to_AIPage();
 	Q_SIGNAL void signal_go_to_WQBPage();
+	Q_SIGNAL void signal_go_to_UserInfoPage();
 };
