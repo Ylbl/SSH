@@ -54,7 +54,7 @@ HomePage::HomePage(QWidget *parent)
     urlCard1->setTitlePixelSize(17);
     urlCard1->setTitleSpacing(25);
     urlCard1->setSubTitleSpacing(13);
-    urlCard1->setUrl("https://github.com/Liniyous/ElaWidgetTools");
+    urlCard1->setUrl("https://github.com/Ylbl/SSH");
     urlCard1->setCardPixmap(QPixmap(":/Resource/Image/github.png"));
     urlCard1->setTitle("开源地址");
     urlCard1->setSubTitle("SSH 遵守宽松的 MIT 开源协议");
@@ -78,7 +78,7 @@ HomePage::HomePage(QWidget *parent)
     urlCard3->setTitlePixelSize(17);
     urlCard3->setTitleSpacing(25);
     urlCard3->setSubTitleSpacing(13);
-    urlCard3->setUrl("https://space.bilibili.com/21256707");
+    urlCard3->setUrl("https://space.bilibili.com/1548845715");
     urlCard3->setCardPixmap(QPixmap(":/Resource/b.png"));
     urlCard3->setTitle("个人频道");
     urlCard3->setSubTitle("其实没发过啥");

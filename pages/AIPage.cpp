@@ -316,7 +316,7 @@ void AIPage::check_object() {
 	t_send_email->detach();
 
 	while (running) {
-		if (!detectedObjects->contains("person") || detectedObjects->contains("bottle")) {
+		if (!detectedObjects->contains("person") || detectedObjects->contains(MyConfig::getInstance().target_object)) {
 			t_is_send.store(true);
 		} else {
 			t_is_send.store(false);

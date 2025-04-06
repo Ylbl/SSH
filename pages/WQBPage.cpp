@@ -30,8 +30,6 @@
 WQBPage::WQBPage(QWidget *parent)
 	: BasePage(parent)
 {
-    but = new ElaPushButton("测试按钮", this);
-
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("错题本");
 

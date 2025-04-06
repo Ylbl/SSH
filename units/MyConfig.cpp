@@ -9,11 +9,24 @@ MyConfig &MyConfig::getInstance() {
     return myconfig;
 }
 
+void MyConfig::mysave() {
+    setting->setValue("rest_time", rest_time);
+    setting->setValue("object_time", object_time);
+    setting->setValue("my_email", my_email);
+    setting->setValue("to_email", to_email);
+    setting->setValue("key", key);
+    setting->setValue("music_path", music_path);
+    setting->setValue("models_path", models_path);
+    setting->setValue("email_type", email_type);
+    setting->setValue("target_object", target_object);
+    setting->sync();
+}
+
 MyConfig::MyConfig() {
     //文件路径+文件名
     QString fileName = "Config.ini";
     //创建配置目标，输入文件路径，文件格式
-    QSettings *setting = new QSettings(fileName, QSettings::IniFormat);
+    setting = new QSettings(fileName, QSettings::IniFormat);
     // 判断文件是否存在
     if (QFile::exists(fileName)) {
         // 文件存在，读出配置项
@@ -29,20 +42,8 @@ MyConfig::MyConfig() {
         music_path = setting->value("music_path", music_path).toString();
         models_path = setting->value("models_path", models_path).toString();
         email_type = setting->value("email_type", email_type).toString();
+        target_object= setting->value("target_object", target_object).toString();
     } else {
-        // 文件不存在，写入配置项，生成配置文件
-        /*setting->setValue("User/name", "张三");
-        setting->setValue("User/age", 30);*/
-        setting->setValue("rest_time", rest_time);
-        setting->setValue("object_time", object_time);
-        setting->setValue("my_email", my_email);
-        setting->setValue("to_email", to_email);
-        setting->setValue("key", key);
-        setting->setValue("music_path", music_path);
-        setting->setValue("models_path", models_path);
-        setting->setValue("email_type", email_type);
-        // setValue只是把配置项写入了缓冲区，若要写入文件，还需执行同步
-        // 不同步，无法写入文件，无法生成文件
-        setting->sync();
+        mysave();
     }
 }

@@ -1,6 +1,7 @@
 ﻿#include "MainWindow.h"
 #include <ElaMessageBar.h>
 #include <ElaTheme.h>
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : ElaWindow(parent)
@@ -28,7 +29,8 @@ void MainWindow::initWindow()
     setUserInfoCardPixmap(QPixmap(":/Resource/OpenSource.png"));
     setUserInfoCardTitle("SSH");
     setUserInfoCardSubTitle("欢迎使用");
-    setWindowTitle("主页");
+
+    setWindowTitle("Copyright © 2025 Xiaoming");
     // setIsStayTop(true);
     // setUserInfoCardVisible(false);
 }
