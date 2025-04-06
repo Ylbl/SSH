@@ -140,7 +140,7 @@ HomePage::HomePage(QWidget *parent)
     ElaPopularCard* homeCard2 = new ElaPopularCard(this);
     connect(homeCard2, &ElaPopularCard::popularCardButtonClicked, this, [=]() {  Q_EMIT signal_go_to_WQBPage();});
     homeCard2->setCardPixmap(QPixmap(":/Resource/Image/control/PersonPicture.png"));
-    homeCard2->setTitle("查看专注次数 专注学习时长等数据");
+    homeCard2->setTitle("查看个人数据");
     homeCard2->setSubTitle("5.0⭐ 实用工具");
     homeCard2->setInteractiveTips("免费使用");
     homeCard2->setDetailedText("SSH在本地保存并记录您的私人数据");
