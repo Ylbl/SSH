@@ -32,6 +32,7 @@ AIPage::AIPage(QWidget* parent)
 	cbox_select_camera->addItems(*comboList);
 	QHBoxLayout* comboBoxLayout = new QHBoxLayout();
 	ElaText* comboBoxText = new ElaText("选择摄像头", this);
+
 	comboBoxText->setTextPixelSize(15);
 	comboBoxLayout->addWidget(comboBoxText);
 	comboBoxLayout->addWidget(cbox_select_camera);
@@ -46,7 +47,7 @@ AIPage::AIPage(QWidget* parent)
 	mcbox_select_model->setCurrentSelection(multiSelectComboList);
 	mcbox_select_model->setDisabled(true);
 	QHBoxLayout* multiSelectComboBoxLayout = new QHBoxLayout();
-	ElaText* multiSelectComboBoxText = new ElaText("选择启用的模型(暂不开启)", this);
+	ElaText* multiSelectComboBoxText = new ElaText("选择模型(暂不启用)", this);
 	multiSelectComboBoxText->setTextPixelSize(15);
 	multiSelectComboBoxLayout->addWidget(multiSelectComboBoxText);
 	multiSelectComboBoxLayout->addWidget(mcbox_select_model);
