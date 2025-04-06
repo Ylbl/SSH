@@ -112,7 +112,7 @@ SettingPage::SettingPage(QWidget *parent)
 
 	ElaScrollPageArea* setting_layout_area8 = new ElaScrollPageArea(this);
 	QHBoxLayout* text_And_edit_layout8 = new QHBoxLayout(setting_layout_area8);
-	text_And_edit_layout8->addWidget(new ElaText("音乐路径"));
+	text_And_edit_layout8->addWidget(new ElaText("目标名称"));
 	text_And_edit_layout8->addStretch();
 	text_And_edit_layout8->addWidget(target_object);
 
